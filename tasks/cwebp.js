@@ -14,6 +14,7 @@ var CHKSUMS = {
   "windows-x64":  "2d0babf3e86a8e9027d09f5b0e79de8efe3c5f70",
   "windows-x86":  "97cd5555bfe28b80016a09f54e0162529f71dd29"
 };
+var COLUMNS = process.stdout.columns || 80;
 
 function isArray(what) {
   return Object.prototype.toString.call(what) === '[object Array]';
@@ -196,9 +197,13 @@ function cwebp(input, output, args) {
 module.exports = function(grunt) {
 
   grunt.log.clearWrite = function() {
-    process.stdout.clearLine();
-    process.stdout.cursorTo(0);
-    grunt.log.write.apply(null, arguments);
+    try {
+      process.stdout.clearLine();
+      process.stdout.cursorTo(0);
+      grunt.log.write.apply(null, arguments);
+    } catch(e) {
+      grunt.log.writeln.apply(null, arguments);
+    }
   };
 
   grunt.registerMultiTask(
@@ -274,8 +279,8 @@ module.exports = function(grunt) {
               var leftL  = 3 + left.stripColors.length;
               var right  = sizeDiff(task.src, task.dest);
               var rightL = right.stripColors.length;
-              var spaces = pad('.', process.stdout.columns - leftL - rightL + 1);
-              deferred.notify([ 'ok', left + spaces + right ]);
+              var spaces = COLUMNS - leftL - rightL + 1;
+              deferred.notify([ 'ok', left + pad('.', spaces) + right ]);
               completed++;
             };
           })(task));
