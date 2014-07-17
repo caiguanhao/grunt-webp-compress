@@ -1,7 +1,7 @@
-grunt-cwebp
-===========
+grunt-webp-compress
+===================
 
-Convert images to WebP format with the encoder tool cwebp.
+Convert images to WebP format with the encoder tool `cwebp`.
 
 This grunt plugin will download the cwebp binary for your system (Linux, Mac or
 Windows) from a [mirror](https://github.com/cghio/webp) of [the official webp
@@ -18,14 +18,14 @@ install and use Grunt plugins. Once you're familiar with that process, you may
 install this plugin with this command:
 
 ```shell
-npm install grunt-cwebp --save-dev
+npm install grunt-webp-compress --save-dev
 ```
 
 Once the plugin has been installed, it may be enabled inside your Gruntfile
 with this line of JavaScript:
 
 ```js
-grunt.loadNpmTasks('grunt-cwebp');
+grunt.loadNpmTasks('grunt-webp-compress');
 ```
 
 ## Options
@@ -34,7 +34,7 @@ grunt.loadNpmTasks('grunt-cwebp');
 
 Type: `Array`   Default: `[]`
 
-List of arguments added to the cwebp command.
+List of arguments added to the `cwebp` command.
 
 ## Example
 
