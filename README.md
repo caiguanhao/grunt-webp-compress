@@ -42,7 +42,9 @@ Type: `Number (integer)`   Default: `10`   Range: `1-99`
 
 Number of `cwebp` commands to run at the same time.
 
-## Example
+## Examples
+
+Generate webp images in the same directory:
 
 ```js
 grunt.initConfig({
@@ -55,6 +57,37 @@ grunt.initConfig({
       files: [
         { src: [ 'public/images/*.jpg', 'public/images/*.png' ] }
       ]
+    }
+  }
+});
+```
+
+Put webp images into another directory:
+
+```js
+grunt.initConfig({
+  cwebp: {
+    images: {
+      files: {
+        'public/images/webp/': [
+          'public/images/*.jpg',
+          'public/images/*.png'
+        ]
+      }
+    }
+  }
+});
+```
+
+File-to-file:
+
+```js
+grunt.initConfig({
+  cwebp: {
+    images: {
+      files: {
+        'public/images/webp.webp': 'public/images/jpg.jpg'
+      }
     }
   }
 });

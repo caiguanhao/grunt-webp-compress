@@ -244,20 +244,33 @@ module.exports = function(grunt) {
       }, concurrency);
       for (var i = 0; i < files.length; i++) {
         for (var j = 0; j < files[i].src.length; j++) {
-          var src   = path.resolve(files[i].src[j]);
-          var dest  = src + '.webp';
-          var rdest = relative(dest);
-          var task  = {
-            src: src,
+          var src  = path.resolve(files[i].src[j]), dest, dot;
+          if (files[i].dest) {
+            if (files[i].src.length < 2) {
+              dest = path.resolve(files[i].dest);
+                     grunt.file.mkdir(path.dirname(dest));
+            } else {
+              dest = path.resolve(files[i].dest);
+                     grunt.file.mkdir(dest);
+              dest = path.join(dest, path.basename(src));
+              dot  = dest.lastIndexOf('.');
+              dest = dest.slice(0, dot > -1 ? dot : undefined) + '.webp';
+            }
+          } else {
+            dest   = src + '.webp';
+          }
+          var rdes = relative(dest);
+          var task = {
+            src:  src,
             dest: dest,
-            rdest: rdest
+            rdes: rdes
           };
           queue.push(task, (function(task) {
             return function(err) {
               if (err) {
                 return deferred.reject(err);
               }
-              var left   = 'Generated ' + task.rdest.cyan;
+              var left   = 'Generated ' + task.rdes.cyan;
               var leftL  = 3 + left.stripColors.length;
               var right  = sizeDiff(task.src, task.dest);
               var rightL = right.stripColors.length;
@@ -276,7 +289,9 @@ module.exports = function(grunt) {
     }).
     then(function() {
       var diff = +new Date - startTime + '';
-      grunt.log.ok(completed + ' conversions finished in ' + diff.cyan + ' ms.');
+      var success = completed + ' conversion' + (completed > 1 ? 's' : '');
+      success += ' finished in ' + diff.cyan + ' ms.';
+      grunt.log.ok(success);
     }).
     catch(function(error) {
       grunt.fail.fatal(error);
