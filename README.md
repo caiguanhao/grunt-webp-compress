@@ -36,6 +36,12 @@ Type: `Array`   Default: `[]`
 
 List of arguments added to the `cwebp` command.
 
+### concurrency
+
+Type: `Number (integer)`   Default: `10`   Range: `1-99`
+
+Number of `cwebp` commands to run at the same time.
+
 ## Example
 
 ```js
@@ -43,7 +49,8 @@ grunt.initConfig({
   cwebp: {
     images: {
       options: {
-        arguments: [ '-q', 50 ]
+        arguments: [ '-q', 50 ],
+        concurrency: 20
       },
       files: [
         { src: [ 'public/images/*.jpg', 'public/images/*.png' ] }

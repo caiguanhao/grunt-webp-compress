@@ -212,6 +212,10 @@ module.exports = function(grunt) {
     var args    = options.arguments;
     var startTime, completed = 0;
 
+    var cc = options.concurrency;
+    if (!/^[1-9][0-9]*$/.test(cc) || !(cc > 0 && cc < 100)) cc = 10;
+    var concurrency = +cc;
+
     if (!isArray(args)) args = [];
 
     Q.
@@ -237,7 +241,7 @@ module.exports = function(grunt) {
       var deferred = Q.defer();
       var queue = async.queue(function(task, callback) {
         cwebp(task.src, task.dest, args).then(callback).catch(callback);
-      }, 10);
+      }, concurrency);
       for (var i = 0; i < files.length; i++) {
         for (var j = 0; j < files[i].src.length; j++) {
           var src   = path.resolve(files[i].src[j]);
