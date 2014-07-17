@@ -1,0 +1,33 @@
+{
+  "name": "grunt-cwebp",
+  "version": "0.0.0",
+  "description": "Convert images to WebP format with the encoder tool cwebp.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/caiguanhao/grunt-cwebp.git"
+  },
+  "keywords": [
+    "images",
+    "convert",
+    "webp",
+    "cwebp",
+    "grunt",
+    "gruntplugin",
+    "grunt-plugin"
+  ],
+  "author": "Cai Guanhao (Choi Goon-ho)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/caiguanhao/grunt-cwebp/issues"
+  },
+  "homepage": "https://github.com/caiguanhao/grunt-cwebp",
+  "dependencies": {
+    "q": "^1.0.1",
+    "async": "^0.9.0"
+  },
+  "files": [
+    "tasks",
+    "LICENSE",
+    "README.md"
+  ]
+}
