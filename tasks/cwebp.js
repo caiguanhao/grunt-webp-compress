@@ -221,6 +221,8 @@ module.exports = function(grunt) {
     if (!/^[1-9][0-9]*$/.test(cc) || !(cc > 0 && cc < 100)) cc = 10;
     var concurrency = +cc;
 
+    CWEBP = options.cwebpPath || CWEBP;
+
     if (!isArray(args)) args = [];
 
     Q.
@@ -234,7 +236,7 @@ module.exports = function(grunt) {
       if (type === undefined || url === undefined) {
         throw 'Can\'t download cwebp for your OS.';
       }
-      if (hashFile(CWEBP) !== CHKSUMS[type]) {
+      if (!options.cwebpPath && hashFile(CWEBP) !== CHKSUMS[type]) {
         return download(url, CWEBP, 0755);
       }
     }).
