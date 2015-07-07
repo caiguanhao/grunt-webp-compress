@@ -1,6 +1,6 @@
 {
   "name": "grunt-webp-compress",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Convert images to WebP format with the encoder tool cwebp.",
   "repository": {
     "type": "git",
