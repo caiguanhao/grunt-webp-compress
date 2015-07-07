@@ -107,10 +107,10 @@ function download(url, filepath, chmod) {
       };
 
       // File finish event added in node v0.10
-      if (Number(process.version.match(/^v(\d+\.\d+)/)[1]) >= 0.10) {
+      if (typeof file._events === 'object' &&
+          typeof file._events.finish === 'function') {
         file.on('finish', onFinish);  
-      }
-      else{
+      } else {
         onFinish();
       }
     });
