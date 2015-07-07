@@ -96,11 +96,23 @@ function download(url, filepath, chmod) {
       } else {
         deferred.notify([ 'ok', 'The downloaded file passed checksum test.' ]);
       }
-      deferred.notify([ 'ok', 'Download completed: ' + relative(filepath) ]);
-      if (chmod) {
-        fs.chmodSync(filepath, chmod);
+
+      var onFinish = function () {
+        deferred.notify([ 'ok', 'Download completed: ' + relative(filepath) ]);
+
+        if (chmod) {
+          fs.chmodSync(filepath, chmod);
+        }
+        deferred.resolve();        
+      };
+
+      // File finish event added in node v0.10
+      if (Number(process.version.match(/^v(\d+\.\d+)/)[1]) >= 0.10) {
+        file.on('finish', onFinish);  
       }
-      deferred.resolve();
+      else{
+        onFinish();
+      }
     });
   });
   request.on('error', deferred.reject);
