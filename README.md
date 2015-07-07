@@ -5,7 +5,7 @@ Convert images to WebP format with the encoder tool `cwebp`.
 
 This grunt plugin will download the cwebp binary for your system (Linux, Mac or
 Windows) from a [mirror](https://github.com/cghio/webp) of [the official webp
-repository](https://code.google.com/p/webp/downloads/list).
+downloads repository](http://downloads.webmproject.org/releases/webp/index.html).
 
 ## Getting Started
 
@@ -41,6 +41,12 @@ List of arguments added to the `cwebp` command.
 Type: `Number (integer)`   Default: `10`   Range: `1-99`
 
 Number of `cwebp` commands to run at the same time.
+
+### cwebpPath
+
+Type: `String`   Default: `undefined`
+
+Specify the file path to the `cwebp` binary.
 
 ## Examples
 
